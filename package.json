@@ -1,0 +1,26 @@
+{
+  "name": "monprojetnode",
+  "version": "1.0.0",
+  "description": "Creation d'une application web avec NodeJS et Angular 6- backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/godzyken/monprojetnode.git"
+  },
+  "author": "godzyken",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/godzyken/monprojetnode/issues"
+  },
+  "homepage": "https://github.com/godzyken/monprojetnode#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-list-endpoints": "^4.0.0",
+    "mariadb": "^2.0.0-alpha",
+    "officegen": "^0.4.7"
+  }
+}
