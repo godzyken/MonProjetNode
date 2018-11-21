@@ -2,45 +2,47 @@ var officegen = require('officegen');
 
 var fs = require('fs');
 var path = require('path');
+var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({extended: true}));
+router.use(bodyParser.urlencoded({ extended: true }));
 var Etudiant = require('./Etudiant');
 
 router.get('/', function (req, res) {
-    Etudiant.getetudiants(function (err, rows) {
-        if (err) {
+    Etudiant.getetudiants(function(err,rows){
+        if(err) {
             res.status(400).json(err);
         }
-        else {
+        else
+        {
             res.json(rows);
         }
     });
 });
 
 router.post('/', function (req, res) {
-    Etudiant.createetudiant(req.body, function (err, count) {
-        if (err) {
+    Etudiant.createetudiant(req.body,function(err,count){
+        if(err)
+        {
             res.status(400).json(err);
         }
-        else {
+        else{
             res.json(req.body);
         }
     });
 });
 
 router.post('/bulletin', function (req, res) {
-    var docx = officegen('docx');
+    var docx = officegen ( 'docx' );
 
-    docx.on('finalize', function (written) {
-        console.log('Finish to create Word file.\nTotal bytes created: ' + written + '\n');
-        4
+    docx.on ( 'finalize', function ( written ) {
+        console.log ( 'Finish to create Word file.\nTotal bytes created: ' + written + '\n' );4
         res.json({'test': 'ok'});
     });
 
-    docx.on('error', function (err) {
-        console.log(err);
+    docx.on ( 'error', function ( err ) {
+        console.log ( err );
     });
 
 
@@ -49,7 +51,7 @@ router.post('/bulletin', function (req, res) {
             val: "No.",
             opts: {
                 cellColWidth: 4261,
-                b: true,
+                b:true,
                 sz: '48',
                 shd: {
                     fill: "7F7F7F",
@@ -58,10 +60,10 @@ router.post('/bulletin', function (req, res) {
                 },
                 fontFamily: "Avenir Book"
             }
-        }, {
+        },{
             val: "Title1",
             opts: {
-                b: true,
+                b:true,
                 color: "A00000",
                 align: "right",
                 shd: {
@@ -70,12 +72,12 @@ router.post('/bulletin', function (req, res) {
                     "themeFillTint": "80"
                 }
             }
-        }, {
+        },{
             val: "Title2",
             opts: {
                 align: "center",
                 cellColWidth: 42,
-                b: true,
+                b:true,
                 sz: '48',
                 shd: {
                     fill: "92CDDC",
@@ -84,10 +86,10 @@ router.post('/bulletin', function (req, res) {
                 }
             }
         }],
-        [1, 'All grown-ups were once children', ''],
-        [2, 'there is no harm in putting off a piece of work until another day.', ''],
-        [3, 'But when it is a matter of baobabs, that always means a catastrophe.', ''],
-        [4, 'watch out for the baobabs!', 'END'],
+        [1,'All grown-ups were once children',''],
+        [2,'there is no harm in putting off a piece of work until another day.',''],
+        [3,'But when it is a matter of baobabs, that always means a catastrophe.',''],
+        [4,'watch out for the baobabs!','END'],
     ]
 
     var tableStyle = {
@@ -98,53 +100,53 @@ router.post('/bulletin', function (req, res) {
         tableFontFamily: "Comic Sans MS"
     }
 
-    var data = [[{align: 'right'}, {
+    var data = [[{ align: 'right' }, {
         type: "text",
         val: "Simple"
     }, {
         type: "text",
         val: " with color",
-        opt: {color: '000088'}
+        opt: { color: '000088' }
     }, {
         type: "text",
         val: "  and back color.",
-        opt: {color: '00ffff', back: '000088'}
+        opt: { color: '00ffff', back: '000088' }
     }, {
         type: "linebreak"
     }, {
         type: "text",
         val: "Bold + underline",
-        opt: {bold: true, underline: true}
+        opt: { bold: true, underline: true }
     }], {
         type: "horizontalline"
-    }, [{backline: 'EDEDED'}, {
+    }, [{ backline: 'EDEDED' }, {
         type: "text",
         val: "  backline text1.",
-        opt: {bold: true}
+        opt: { bold: true }
     }, {
         type: "text",
         val: "  backline text2.",
-        opt: {color: '000088'}
+        opt: { color: '000088' }
     }], {
         type: "text",
         val: "Left this text.",
-        lopt: {align: 'left'}
+        lopt: { align: 'left' }
     }, {
         type: "text",
         val: "Center this text.",
-        lopt: {align: 'center'}
+        lopt: { align: 'center' }
     }, {
         type: "text",
         val: "Right this text.",
-        lopt: {align: 'right'}
+        lopt: { align: 'right' }
     }, {
         type: "text",
         val: "Fonts face only.",
-        opt: {font_face: 'Arial'}
+        opt: { font_face: 'Arial' }
     }, {
         type: "text",
         val: "Fonts face and size.",
-        opt: {font_face: 'Arial', font_size: 40}
+        opt: { font_face: 'Arial', font_size: 40 }
     }, {
         type: "table",
         val: table,
@@ -178,13 +180,13 @@ router.post('/bulletin', function (req, res) {
 
     var pObj = docx.createByJson(data);
 
-    var out = fs.createWriteStream('/tmp/out_json.docx');
+    var out = fs.createWriteStream ( '/tmp/out_json.docx' );
 
-    out.on('error', function (err) {
-        console.log(err);
+    out.on ( 'error', function ( err ) {
+        console.log ( err );
     });
 
-    docx.generate(out);
+    docx.generate ( out );
 });
 
 module.exports = router;

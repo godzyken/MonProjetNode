@@ -10,5 +10,4 @@ var Note = {
         return db.query('INSERT into t_note(valeur, date_creation, id_matiere, id_etudiant) values(?, ?, ?, ?)',[Note.valeur, created, Note.id_matiere, Note.id_etudiant], callback);
     }
 }
-
 module.exports = Note;

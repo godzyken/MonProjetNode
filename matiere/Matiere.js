@@ -8,5 +8,4 @@ var Matiere = {
         return db.query('INSERT into t_matiere(libelle, coefficient) values (?,?)',[Matiere.libelle, Matiere.coefficient], callback)
     }
 }
-
 module.exports = Matiere;

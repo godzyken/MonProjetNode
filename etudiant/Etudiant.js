@@ -8,5 +8,4 @@ var Etudiant = {
         return db.query('INSERT into t_etudiant(matricule, nom, prenom) values(?, ?, ?)', [Etudiant.matricule, Etudiant.nom, Etudiant.prenom], callback);
     }
 }
-
 module.exports = Etudiant;
