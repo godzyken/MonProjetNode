@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="PROJECT" libraries="{@types/jest, @types/promise-dag, @types/promise-map-limit, @types/promise.prototype.finally, @types/typescript-deferred, @types/vue-select}" />
+    <includedPredefinedLibrary name="HTTP Response Handler" />
+  </component>
+</project>
