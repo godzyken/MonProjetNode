@@ -30,4 +30,16 @@ router.post('/', function (req, res) {
     });
 });
 
+router.post('/', function (req, res) {
+    Matiere.deletematiere(req.body, function (err, count) {
+        if (err)
+        {
+            res.status(400).json(err);
+        }
+        else {
+            res.json(req.body);
+        }
+    });
+});
+
 module.exports = router;
